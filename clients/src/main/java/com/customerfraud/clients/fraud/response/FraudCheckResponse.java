@@ -1,4 +1,4 @@
-package com.customerfraud.customer.response;
+package com.customerfraud.clients.fraud.response;
 
 import lombok.NoArgsConstructor;
 
