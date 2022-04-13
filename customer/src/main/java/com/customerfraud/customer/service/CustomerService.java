@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.customerfraud.clients.fraud.FraudClient;
-import com.customerfraud.clients.fraud.response.FraudCheckResponse;
+import com.customerfraud.clients.fraud.model.FraudCheckResponse;
 import com.customerfraud.customer.model.Customer;
 import com.customerfraud.customer.model.CustomerRegistrationRequest;
 import com.customerfraud.customer.repository.CustomerRepository;
