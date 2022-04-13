@@ -6,6 +6,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.customerfraud.clients.fraud.FraudClient;
 import com.customerfraud.clients.fraud.model.FraudCheckResponse;
+import com.customerfraud.clients.fraud.model.NotificationRequest;
+import com.customerfraud.clients.notification.NotificationClient;
 import com.customerfraud.customer.model.Customer;
 import com.customerfraud.customer.model.CustomerRegistrationRequest;
 import com.customerfraud.customer.repository.CustomerRepository;
@@ -22,6 +24,9 @@ public class CustomerService {
 	
 	@Autowired
 	FraudClient fraudClient;
+	
+	@Autowired
+	NotificationClient notificationClient;
 
 	public void register(CustomerRegistrationRequest customerRegRe) {
 
@@ -39,5 +44,15 @@ public class CustomerService {
 		// todo: check if email valid
 		// todo: check if email not takem
 		// todo: store customer in db
+	    // todo: send notification
+        // todo: make it async. i.e add to queue
+		  notificationClient.sendNotification(
+	                new NotificationRequest(
+	                        customer.getId(),
+	                        customer.getEmail(),
+	                        String.format("Hi %s, welcome to CustomerFraudApplication...",
+	                                customer.getFirstName())
+	                )
+	        );
 	}
 }
