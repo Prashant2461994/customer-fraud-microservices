@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.customerfraud.clients.fraud.FraudClient;
+import com.customerfraud.clients.fraud.NotificationClient;
 import com.customerfraud.clients.fraud.model.FraudCheckResponse;
 import com.customerfraud.clients.fraud.model.NotificationRequest;
-import com.customerfraud.clients.notification.NotificationClient;
 import com.customerfraud.customer.model.Customer;
 import com.customerfraud.customer.model.CustomerRegistrationRequest;
 import com.customerfraud.customer.repository.CustomerRepository;
@@ -33,6 +33,7 @@ public class CustomerService {
 		Customer customer = Customer.builder().firstName(customerRegRe.getFistName())
 				.lastName(customerRegRe.getLastName()).email(customerRegRe.getEmail()).build();
 
+		
 		customerRepository.saveAndFlush(customer);
 		
 		FraudCheckResponse fraudCheckResponse =	fraudClient.isFraudster( customer.getId());

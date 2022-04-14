@@ -9,9 +9,24 @@
 	</parent>
 	<artifactId>notification</artifactId>
 	<name>notification</name>
-
+	<properties>
+		<spring.boot.starter.web.version>2.5.7</spring.boot.starter.web.version>
+	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring.boot.starter.web.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.customerfraud.clients</groupId>
 			<artifactId>clients</artifactId>

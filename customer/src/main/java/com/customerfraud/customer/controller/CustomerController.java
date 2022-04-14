@@ -23,6 +23,5 @@ public class CustomerController {
 	public void registerCustomer(@RequestBody CustomerRegistrationRequest customerRequest) {
 		log.info("new customer registration {}", customerRequest);
 		customerService.register(customerRequest);
-
 	}
 }

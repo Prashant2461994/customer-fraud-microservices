@@ -1,4 +1,4 @@
-package com.customerfraud.clients.notification;
+package com.customerfraud.clients.fraud;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
