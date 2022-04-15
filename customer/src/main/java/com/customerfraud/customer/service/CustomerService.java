@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import com.customerfraud.clients.fraud.FraudClient;
 import com.customerfraud.clients.fraud.NotificationClient;
 import com.customerfraud.clients.fraud.model.FraudCheckResponse;
+import com.customerfraud.clients.fraud.model.NotificationRequest;
 import com.customerfraud.customer.model.Customer;
 import com.customerfraud.customer.model.CustomerRegistrationRequest;
 import com.customerfraud.customer.repository.CustomerRepository;
