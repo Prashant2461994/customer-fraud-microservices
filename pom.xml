@@ -96,5 +96,6 @@
 		<module>clients</module>
 		<module>notification</module>
 		<module>apigw</module>
+		<module>adv-msg-queue</module>
 	</modules>
 </project>
