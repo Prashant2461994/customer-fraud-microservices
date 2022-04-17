@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.customerfraud.amqp.producer.RabbitMQMessageProducer;
 import com.customerfraud.clients.fraud.FraudClient;
-import com.customerfraud.clients.fraud.NotificationClient;
 import com.customerfraud.clients.fraud.model.FraudCheckResponse;
 import com.customerfraud.clients.fraud.model.NotificationRequest;
+import com.customerfraud.customer.config.CustomerConfig;
 import com.customerfraud.customer.model.Customer;
 import com.customerfraud.customer.model.CustomerRegistrationRequest;
 import com.customerfraud.customer.repository.CustomerRepository;
@@ -26,7 +27,12 @@ public class CustomerService {
 	FraudClient fraudClient;
 	
 	@Autowired
-	NotificationClient notificationClient;
+	RabbitMQMessageProducer producer;
+	
+	
+	@Autowired
+	CustomerConfig config;
+	
 
 	public void register(CustomerRegistrationRequest customerRegRe) {
 
@@ -47,13 +53,13 @@ public class CustomerService {
 		// todo: store customer in db
 	    // todo: send notification
         // todo: make it async. i.e add to queue
-		  notificationClient.sendNotification(
-	                new NotificationRequest(
-	                        customer.getId(),
-	                        customer.getEmail(),
-	                        String.format("Hi %s, welcome to CustomerFraudApplication...",
-	                                customer.getFirstName())
-	                )
-	        );
+	  NotificationRequest notificationRequest = new NotificationRequest(
+		                                        customer.getId(),
+		                                        customer.getEmail(),
+		                                        String.format("Hi %s, welcome to CustomerFraudApplication...",
+		                                        customer.getFirstName())
+		                                        );
+		
+		producer.publish(notificationRequest, config.getInternalExchange(), config.getInternalNotificationRoutingKeyExchange());
 	}
 }

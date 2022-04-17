@@ -7,7 +7,9 @@
 		<artifactId>customer-fraud</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>adv-msg-queue</artifactId>
+	 <groupId>com.customerfraud.amqp</groupId>
+	 <artifactId>adv-msg-queue</artifactId>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

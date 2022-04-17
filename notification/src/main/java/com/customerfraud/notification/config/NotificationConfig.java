@@ -1,23 +1,15 @@
-package com.customerfraud.customer.config;
+package com.customerfraud.notification.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class CustomerConfig {
-
-	@Bean(name = "restTemplate")
-	@LoadBalanced
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+public class NotificationConfig {
 
 	@Value("${rabbitmq.exchanges.internal}")
 	private String internalExchange;
@@ -37,10 +29,12 @@ public class CustomerConfig {
 	public Queue notificationQueue() {
 		return new Queue(this.notificationQueue);
 	}
-
+	
 	@Bean
 	public Binding internalToNotificationBinding() {
-		return BindingBuilder.bind(notificationQueue()).to(this.internalTopicExchange())
+		return BindingBuilder
+				.bind(notificationQueue())
+				.to(this.internalTopicExchange())
 				.with(this.internalNotificationRoutingKeyExchange);
 	}
 
