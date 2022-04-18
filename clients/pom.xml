@@ -5,6 +5,7 @@
     <artifactId>customer-fraud</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+  <packaging>jar</packaging>
   <groupId>com.customerfraud.clients</groupId>
   <artifactId>clients</artifactId>
 </project>

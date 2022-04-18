@@ -7,6 +7,7 @@
 		<artifactId>customer-fraud</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
+	<packaging>jar</packaging>
 	<artifactId>customer</artifactId>
 	<name>customer</name>
 	<description>This is a customer microservice</description>
@@ -48,4 +49,14 @@
 			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
 </project>

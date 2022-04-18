@@ -7,6 +7,7 @@
 		<artifactId>customer-fraud</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
+	<packaging>jar</packaging>
 	<artifactId>apigw</artifactId>
 	<name>This is spring cloud api gateway</name>
 
@@ -30,5 +31,14 @@
 		</dependency>
 	</dependencies>
 
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
