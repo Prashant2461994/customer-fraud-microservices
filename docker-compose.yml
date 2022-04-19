@@ -7,13 +7,12 @@ services:
       POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
     volumes:
-      - postgres:/data/postgres
+    - postgres:/data/postgres
     ports:
-      - "5432:5432"
+    - 5432:5432
     networks:
-      - postgres
+    - postgres
     restart: unless-stopped
-
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
@@ -22,30 +21,51 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
-      - pgadmin:/var/lib/pgadmin
+    - pgadmin:/var/lib/pgadmin
     ports:
-      - "5050:80"
+    - 5050:80
     networks:
-      - postgres
+    - postgres
     restart: unless-stopped
-  
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
     ports:
-       - 9411:9411
-  
+    - 9411:9411
   rabbitmq:
     image: rabbitmq:3.9.11-management-alpine
     container_name: rabbitmq
     ports:
-       - "5672:5672"
-       - "15672:15672"
-
+    - 5672:5672
+    - 15672:15672
+  apigw:
+    image: prashant24062994/apigw:latest
+    container_name: apigw
+    ports:
+    - 8083:8083
+    networks:
+    - spring
+    environment:
+    - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+    - zipkin
+    - eureka-server
+  eureka-server:
+    image: prashant24062994/eureka-server:latest
+    container_name: eureka-server
+    ports:
+    - 9411:9411
+    environment:
+    - SPRING_PROFILES_ACTIVE=docker
+    networks:
+    - spring
+    depends_on:
+    - zipkin
 networks:
   postgres:
     driver: bridge
-
+  spring:
+    driver: bridge
 volumes:
-  postgres:
-  pgadmin:
+  postgres: null
+  pgadmin: null
