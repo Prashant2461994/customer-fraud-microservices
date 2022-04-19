@@ -3,7 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>com.customer-fraud</groupId>
 	<artifactId>customer-fraud</artifactId>
 	<version>1.0-SNAPSHOT</version>
@@ -21,6 +20,9 @@
 		<org.springframework.boot.starter.test.version>2.6.6</org.springframework.boot.starter.test.version>
 		<spring.boot.maven.plugin.version>2.5.7</spring.boot.maven.plugin.version>
 		<spring.cloud-version>2020.0.3</spring.cloud-version>
+		<image>docker.io/prashant24062994/${project.artifactId}:${project.version}</image>
+		<docker.hub.username>prashant24062994</docker.hub.username>
+		<docker.hub.password>Macho$#2030</docker.hub.password>
 	</properties>
 
 
@@ -68,8 +70,6 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-devtools</artifactId> 
-			<version>2.6.6</version> </dependency> -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -93,8 +93,50 @@
 						</execution>
 					</executions>
 				</plugin>
+				<plugin>
+					<groupId>com.google.cloud.tools</groupId>
+					<artifactId>jib-maven-plugin</artifactId>
+					<configuration>
+						<from>
+							<image>eclipse-temurin:17</image>
+							<auth>
+								<username>${docker.hub.username}</username>
+								<password>${docker.hub.password}</password>
+							</auth>
+							<platforms>
+								<platform>
+									<architecture>arm64</architecture>
+									<os>linux</os>
+								</platform>
+								<platform>
+									<architecture>amd64</architecture>
+									<os>linux</os>
+								</platform>
+							</platforms>
+						</from>
+						<to>
+							<image>${image}</image>
+							<auth>
+								<username>${docker.hub.username}</username>
+								<password>${docker.hub.password}</password>
+							</auth>
+							<tags>
+								<tag>latest</tag>
+							</tags>
+						</to>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>build</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -107,6 +149,23 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
+
+
+	<profiles>
+		<profile>
+			<id>build-docker-image</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.cloud.tools</groupId>
+						<artifactId>jib-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<modules>
 		<module>customer</module>
