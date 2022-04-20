@@ -10,8 +10,6 @@ spring:
         password: password
         url: jdbc:postgresql://localhost:5432/notification
         username: amigoscode
-    rabbitmq:
-      addresses: rabbitmq:5672
     jpa:
         hibernate:
             ddl-auto: update
