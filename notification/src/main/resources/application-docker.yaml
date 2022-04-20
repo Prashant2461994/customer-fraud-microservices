@@ -6,7 +6,7 @@ spring:
   zipkin:
     base-url: http://zipkin:9411
   rabbitmq:
-    addresses: localhost:5672
+    addresses: rabbitmq:5672
   datasource:
     password: password
     url: jdbc:postgresql://postgres:5432/notification
