@@ -5,6 +5,8 @@ spring:
     name: notification
   zipkin:
     base-url: http://zipkin:9411
+  rabbitmq:
+    addresses: localhost:5672
   datasource:
     password: password
     url: jdbc:postgresql://postgres:5432/notification
@@ -17,8 +19,6 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
-  rabbitmq:
-    addresses: localhost:5672
 eureka:
   client:
     service-url:
