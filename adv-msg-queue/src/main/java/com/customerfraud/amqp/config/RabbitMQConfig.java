@@ -26,6 +26,7 @@ public class RabbitMQConfig {
 		return rabbitTemplate;
 	}
 
+	@Bean(name="simpleRabbitListenerContainerFactory")
 	public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory() {
 		SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
 		factory.setConnectionFactory(connectionFactory);
