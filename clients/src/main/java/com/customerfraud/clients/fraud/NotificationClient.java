@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.customerfraud.clients.fraud.model.NotificationRequest;
 
-@FeignClient("notification")
+@FeignClient(name = "notification",url = "${clients.notificaiton.url}")
 public interface NotificationClient {
 	
 	@PostMapping("api/v1/notification")

@@ -5,11 +5,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 
 import com.customerfraud.amqp.producer.RabbitMQMessageProducer;
 import com.customerfraud.notification.config.NotificationConfig;
 
 @SpringBootApplication(scanBasePackages = { "com.customerfraud.notification", "com.customerfraud.amqp" })
+@PropertySources({ @PropertySource("classpath:clients-${spring.profiles.active}.properties") })
 @EnableEurekaClient
 public class NotificationApp implements CommandLineRunner {
 

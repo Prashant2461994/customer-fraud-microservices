@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.customerfraud.clients.fraud.model.FraudCheckResponse;
 
 
-@FeignClient("fraud")
+@FeignClient(name = "fraud",url = "${clients.fraud.url}")
 public interface FraudClient {
 	
 	@GetMapping(path="api/v1/fraud-check/{customerId}")
