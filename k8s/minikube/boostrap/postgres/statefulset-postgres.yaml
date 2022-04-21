@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgres-statefulset
+  name: postgres
   labels:
     app: postgres
 spec:
@@ -23,7 +23,7 @@ spec:
           persistentVolumeClaim:
             claimName: postgres-local-pv-pvclaim
       containers:
-        - name: postgres-container
+        - name: postgres
           image: postgres
           ports:
             - containerPort: 5432
