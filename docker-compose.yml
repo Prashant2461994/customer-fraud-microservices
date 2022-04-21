@@ -43,29 +43,29 @@ services:
     - 15672:15672
     networks:
     - spring
-  apigw:
-    image: prashant24062994/apigw:latest
-    container_name: apigw
-    ports:
-    - 8083:8083
-    networks:
-    - spring
-    environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-    - zipkin
-    - eureka-server
-  eureka-server:
-    image: prashant24062994/eureka-server:latest
-    container_name: eureka-server
-    ports:
-    - 8761:8761
-    environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    networks:
-    - spring
-    depends_on:
-    - zipkin
+#  apigw:
+#    image: prashant24062994/apigw:latest
+#    container_name: apigw
+#    ports:
+#    - 8083:8083
+#    networks:
+#    - spring
+#    environment:
+#    - SPRING_PROFILES_ACTIVE=docker
+#    depends_on:
+#    - zipkin
+#    - eureka-server
+#  eureka-server:
+#    image: prashant24062994/eureka-server:latest
+#    container_name: eureka-server
+#    ports:
+#    - 8761:8761
+#    environment:
+#    - SPRING_PROFILES_ACTIVE=docker
+#    networks:
+#    - spring
+#    depends_on:
+#    - zipkin
   customer:
     image: prashant24062994/customer:latest
     container_name: customer
