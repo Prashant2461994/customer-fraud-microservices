@@ -29,7 +29,9 @@ eureka:
     register-with-eureka: true
     enabled: false
     
-    
+logging:
+  file:
+    path: /var/logs/customer    
     
 rabbitmq:
   exchanges:

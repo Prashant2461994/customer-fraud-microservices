@@ -1,0 +1,14 @@
+We need following databases for this group of microservices.
+-----------------------------------------------------------------
+i) customers;
+ii) notification;
+iii) fraud;
+
+To manually create these databases inside database pods we need to login to minikube and then into postgres pod
+---------------------------------------------------------------------------------------------------------------
+i.) minikube ssh
+ii.) kubectl exec -it postgres-0 -- psql -U amigoscode
+Run following query to create databases;
+    CREATE DATABASE IF NOT EXISTS customers;
+    CREATE DATABASE IF NOT EXISTS notification;
+    CREATE DATABASE IF NOT EXISTS fraud;

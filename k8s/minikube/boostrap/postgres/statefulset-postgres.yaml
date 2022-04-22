@@ -17,30 +17,32 @@ spec:
         app: postgres
         type: postgres-pod
     spec:
-    
       volumes:
-        - name: postgres-vol-mount
-          persistentVolumeClaim:
-            claimName: postgres-local-pv-pvclaim
+      - name: postgres-vol-mount
+        persistentVolumeClaim:
+          claimName: postgres-local-pv-pvclaim
+      - name: required-databases
+        configMap:
+          name: postgres-init-config
       containers:
-        - name: postgres
-          image: postgres
-          ports:
-            - containerPort: 5432
-              name: postgres
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgres-vol-mount
-          envFrom:
-            - configMapRef:
-                name: postgres-configmap
-          resources:
-            requests:
-              cpu: 100m
-              memory: 256Mi
-            limits:
-              cpu: 500m
-              memory: 512Mi
+      - name: postgres
+        image: postgres
+        ports:
+        - containerPort: 5432
+          name: postgres
+        volumeMounts:
+        - name: postgres-vol-mount
+          mountPath: /var/lib/postgresql/data
+        - name: required-databases
+          mountPath: /docker-entrypoint-initdb.d
+        envFrom:
+        - configMapRef:
+            name: postgres-configmap
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
       restartPolicy: Always
-       
-  
