@@ -29,10 +29,12 @@ eureka:
     register-with-eureka: true
     enabled: false
     
+
 logging:
   file:
-    path: /var/logs/customer    
+    path: /var/log/customer-app/
     
+
 rabbitmq:
   exchanges:
     internal: internal.exchange
