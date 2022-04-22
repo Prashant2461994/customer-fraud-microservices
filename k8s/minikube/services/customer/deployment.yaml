@@ -27,8 +27,8 @@ spec:
           volumeMounts:
             - name: customer-logs
               mountPath: /
-      
-    volumes:
-        - hostPath:
-            name: customer-logs
+
+      volumes:
+        - name: customer-logs
+          hostPath:
             path: /mnt/customerlogs
