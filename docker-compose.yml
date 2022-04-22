@@ -66,54 +66,49 @@ services:
 #    - spring
 #    depends_on:
 #    - zipkin
-  customer:
-    image: prashant24062994/customer:latest
-    container_name: customer
-    ports:
-    - 8080:8080
-    networks:
-    - spring
-    - postgres
-    environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-    - postgres
-    - zipkin
-    - eureka-server
-    - apigw
-  fraud:
-    image: prashant24062994/fraud:latest
-    container_name: fraud
-    ports:
-    - 8081:8081
-    networks:
-    - spring
-    - postgres
-    environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-    - postgres
-    - zipkin
-    - eureka-server
-    - apigw
-    - customer
-  notification:
-    image: prashant24062994/notification:latest
-    container_name: notification
-    ports:
-    - 8082:8082
-    networks:
-    - spring
-    - postgres
-    environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-    - postgres
-    - zipkin
-    - eureka-server
-    - apigw
-    - customer
-    - fraud
+#  customer:
+#    image: prashant24062994/customer:latest
+#    container_name: customer
+#    ports:
+#    - 8080:8080
+#    networks:
+#    - spring
+#    - postgres
+#    environment:
+#    - SPRING_PROFILES_ACTIVE=docker
+#    depends_on:
+#    - postgres
+#    - zipkin
+#    
+#  fraud:
+#    image: prashant24062994/fraud:latest
+#    container_name: fraud
+#    ports:
+#    - 8081:8081
+#    networks:
+#    - spring
+#    - postgres
+#    environment:
+#    - SPRING_PROFILES_ACTIVE=docker
+#    depends_on:
+#    - postgres
+#    - zipkin
+#    - customer
+#  notification:
+#    image: prashant24062994/notification:latest
+#    container_name: notification
+#    ports:
+#    - 8082:8082
+#    networks:
+#    - spring
+#    - postgres
+#    environment:
+#    - SPRING_PROFILES_ACTIVE=docker
+#    depends_on:
+#    - postgres
+#    - zipkin
+#    - customer
+#    - fraud
 networks:
   postgres:
     driver: bridge
